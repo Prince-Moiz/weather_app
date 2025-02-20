@@ -32,7 +32,6 @@ class _WeatherPageState extends State<WeatherPage> {
     }
   }
 
-
   //weather animations
   String getWeatherAnimation(String? mainCondition) {
     if (mainCondition == null || mainCondition.isEmpty) {
@@ -60,40 +59,55 @@ class _WeatherPageState extends State<WeatherPage> {
     }
   }
 
-
-
-
-
-
-
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
     //fetch weather on startup
-  _fetchWether();
+    _fetchWether();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center
-          ,children: [
-          Icon(Icons.location_on_sharp,color: Colors.grey[400],),
-          SizedBox(height: 24,),
-          _weather?.cityName != null
-              ? Text(_weather!.cityName,style: TextStyle(color: Colors.grey[400],fontWeight: FontWeight.bold,fontSize: 23)) // Show city name when available
-              : Lottie.asset('assets/nameload.json',width: 50,height: 50), // Show animation when loading
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.location_on_sharp,
+              color: Colors.grey[400],
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            _weather?.cityName != null
+                ? Text(_weather!.cityName,
+                    style: TextStyle(
+                        color: Colors.grey[400],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 23)) // Show city name when available
+                : Lottie.asset('assets/nameload.json',
+                    width: 50, height: 50), // Show animation when loading
 
-
-          Lottie.asset(getWeatherAnimation(_weather?.mainCondition)),
-          _weather?.cityName != null
-              ? Text("${_weather?.tempreture.round()}ºC",style: TextStyle(color: Colors.grey[400],fontWeight: FontWeight.bold,fontSize: 23)) // Show city name when available
-              : Lottie.asset('assets/nameload.json',width: 50,height: 50),
-          Text(_weather?.mainCondition ?? 'Cannot find the city weather',style: TextStyle(color: Colors.grey[400],fontWeight: FontWeight.bold,fontSize: 23),)
-        ],),
+            Lottie.asset(getWeatherAnimation(_weather?.mainCondition)),
+            _weather?.cityName != null
+                ? Text("${_weather?.tempreture.round()}ºC",
+                    style: TextStyle(
+                        color: Colors.grey[400],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 23)) // Show city name when available
+                : Lottie.asset('assets/nameload.json', width: 50, height: 50),
+            Text(
+              _weather?.mainCondition ?? 'Cannot find the city weather',
+              style: TextStyle(
+                  color: Colors.grey[400],
+                  fontWeight: FontWeight.bold,
+                  fontSize: 23),
+            )
+          ],
+        ),
       ),
     );
   }
